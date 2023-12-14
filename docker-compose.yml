@@ -1,0 +1,29 @@
+version: "3"
+services:
+  backend:
+    image: vidit0812/resobin-backend-dope
+    container_name: resobin-backend-container
+    ports:
+      - "8000:8000"
+    networks:
+      - resobin-network
+    depends_on:
+      - redis
+    volumes:
+      - resobin-volumes:/app
+
+  redis:
+    image: redis
+    container_name: redis-container
+    ports:
+      - "6379:6379"
+    networks:
+      - resobin-network
+
+networks:
+  resobin-network:
+    driver: bridge
+
+volumes:
+  resobin-volumes:
+    driver: local
